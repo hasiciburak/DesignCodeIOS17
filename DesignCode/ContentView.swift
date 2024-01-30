@@ -49,7 +49,9 @@ struct ContentView: View {
                 HStack {
                     HStack {
                         Image(systemName: "ellipsis")
+                            .symbolEffect(.pulse)
                         Image(systemName: "sparkle.magnifyingglass")
+                            .symbolEffect(.scale.up)
                         Image(systemName: "face.smiling")
                     }
                     .padding()
@@ -86,6 +88,7 @@ struct ContentView: View {
             .cornerRadius(20)
             .padding(20)
             .offset(y: 80)
+            Image(systemName: "wand.and.rays")
         }
         .frame(maxWidth: 400)
         .padding(20)
