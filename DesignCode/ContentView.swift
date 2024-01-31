@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var isTapped = false
+
     var body: some View {
         ZStack {
             Image(.image1)
@@ -16,9 +18,6 @@ struct ContentView: View {
                 .frame(height: 300)
                 .cornerRadius(20)
             VStack(alignment: .center) {
-                Image(systemName: "sparkles")
-                    .imageScale(.large)
-                    .foregroundStyle(.secondary)
                 Text("modern architecture, an isometric tiny house")
                     .font(.subheadline)
                 HStack {
@@ -62,7 +61,7 @@ struct ContentView: View {
                         bottomTrailing: 0,
                         topTrailing: 20
                     ))
-                        .strokeBorder(linearGradient)
+                    .strokeBorder(linearGradient)
                     )
                     .offset(x: -20, y: 20)
                     Spacer()
@@ -88,7 +87,25 @@ struct ContentView: View {
             .cornerRadius(20)
             .padding(20)
             .offset(y: 80)
-            Image(systemName: "wand.and.rays")
+
+            HStack(spacing: 30) {
+                Image(systemName: "wand.and.rays")
+                    .symbolEffect(.variableColor.iterative.reversing)
+                Image(systemName: isTapped ? "pause.fill" : "play.fill")
+                    .frame(width: 44)
+                    .contentTransition(.symbolEffect(.replace))
+                    .onTapGesture {
+                        isTapped.toggle()
+                    }
+                Image(systemName: "bell.and.waves.left.and.right.fill")
+                    .symbolEffect(.bounce, options: .speed(3).repeat(3), value: 1)
+            }
+            .font(.largeTitle)
+            .padding(20)
+            .background(.ultraThinMaterial)
+            .overlay(RoundedRectangle(cornerRadius: 20)
+                .strokeBorder(linearGradient))
+            .cornerRadius(20)
         }
         .frame(maxWidth: 400)
         .padding(20)
@@ -98,11 +115,10 @@ struct ContentView: View {
 
     var linearGradient: LinearGradient {
         LinearGradient(
-            colors: [.clear,
-                                .primary.opacity(0.3),
-                                .clear],
-                       startPoint: .topLeading,
-                       endPoint: .bottomTrailing)
+            colors: [.clear, .primary.opacity(0.3), .clear],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
     }
 }
 
