@@ -10,6 +10,7 @@ struct ContentView: View {
     struct AnimationValues {
         var position = CGPoint(x: 0, y: 0)
         var scale = 1.0
+        var opacity = 0.0
     }
     
     var body: some View {
@@ -40,6 +41,7 @@ struct ContentView: View {
                 .keyframeAnimator(initialValue: AnimationValues(), trigger: downloading) { content, value in
                     content.offset(x: value.position.x, y: value.position.y)
                         .scaleEffect(CGSize(width: 1.0, height: 1.0))
+                        .opacity(value.opacity)
                 } keyframes: { _ in
                     // Code will here
                     KeyframeTrack(\.position) {
@@ -49,6 +51,9 @@ struct ContentView: View {
                     KeyframeTrack(\.scale) {
                         CubicKeyframe(1.2, duration: 0.5)
                         CubicKeyframe(1, duration: 0.5)
+                    }
+                    KeyframeTrack(\.opacity) {
+                        CubicKeyframe(1, duration: 0.3)
                     }
                 }
             
