@@ -70,6 +70,11 @@ struct ContentView: View {
             
             play
                 .frame(width: isTapped ? 220 : 50)
+                .foregroundStyle(ShaderLibrary.angledFill(
+                    .float(10),
+                    .float(10),
+                    .color(.white)
+                ))
                 .foregroundStyle(.primary, .white)
                 .font(.largeTitle)
                 .padding(20)
